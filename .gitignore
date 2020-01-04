@@ -1,0 +1,31 @@
+.tmp
+/node_modules/
+
+testem.*.json
+tests.tap
+.DS_Store
+
+# emacs artifacts
+*~
+*#
+
+# vim artifacts
+*.swp
+
+# intellij artifacts
+.idea/
+*.iml
+
+# python artifacts
+*.pyc
+.Python
+/bin/
+/include/
+/lib/
+pip-selfcheck.json
+__pycache__/
+
+# django artifacts
+
+# npm artifacts
+npm-debug.log.*
