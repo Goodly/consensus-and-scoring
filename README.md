@@ -23,3 +23,5 @@ To do:
 To don't:
 
 1. Please don't incorporate Numpy or Pandas in this code base.
+2. Please don't install a virtualenv in this repo and commit it.
+   Your virtualenv should be outside of this repo tree.
