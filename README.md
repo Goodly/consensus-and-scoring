@@ -12,6 +12,8 @@ https://docs.python.org/3/library/collections.html
 
 https://realpython.com/python3-object-oriented-programming/
 
+https://docs.python.org/3/library/unittest.html
+
 To do:
 
 1. This is Python 2. It should be changed as needed to run under Python 3.
