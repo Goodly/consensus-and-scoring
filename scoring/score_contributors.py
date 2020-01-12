@@ -16,8 +16,8 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from django.db.models import Sum
-from django.contrib import messages
+# from django.db.models import Sum
+# from django.contrib import messages
 from thresher.models import save_message
 from thresher.exceptions import InvalidTaskType
 
@@ -36,7 +36,7 @@ def score_contributors(user_id, tua_group):
         queryset = QuizScore.objects.all()
         group_by_join = 'quiz_taskrun__contributor'
     else:
-        raise InvalidTaskType(u"tua_type must be "
+        raise InvalidTaskType("tua_type must be "
                                "'HLTR' or 'QUIZ' to build query.")
 
     totals_by_contributor = (queryset
@@ -76,6 +76,6 @@ def score_contributors(user_id, tua_group):
         )
         counter += 1
 
-    message = (u"Used '{}' to calculate scores for {} contributors"
+    message = ("Used '{}' to calculate scores for {} contributors"
                .format(tua_group.name, counter))
-    save_message(user_id, message, messages.SUCCESS)
+    # save_message(user_id, message, messages.SUCCESS)
