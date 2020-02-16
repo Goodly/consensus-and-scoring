@@ -280,8 +280,9 @@ def toStartsEnds(passers):
 def toFlagMatrix(starts, ends, nStarts, nEnds, codedUsers, flags):
 
     #take out numpy
-    if len(nStarts)>0 and len(np.unique(codedUsers)>0):
-        flagMatrix = np.zeros((len(nStarts), len(np.unique(codedUsers))))
+    numUsers = countUsers(codedUsers)
+    if len(nStarts)>0 and numUsers>0:
+        flagMatrix = [[0]*len(nStarts) for u in numUsers]
         #i corresponds tot he code of a user
 
         for i in np.arange(len(starts)):
@@ -297,13 +298,19 @@ def toFlagMatrix(starts, ends, nStarts, nEnds, codedUsers, flags):
                     flagMatrix[j][codedUsers[i]] = flags[i]
         return flagMatrix.T
     return []
-
+def countUsers(users):
+    #time complexity here is horrendous, I think inputs should be small enough that it doens't matter
+    uq = []
+    for u in users:
+        if u not in uq:
+            uq.append(u)
+    return len(uq)
 def assignFlags(matrix):
     numUsers = len(matrix)
     numNStarts = len(matrix[0])
     currFlag = 1
     sortedNStarts = []
-    flags = np.zeros(numNStarts)
+    flags = [0]*numNStarts
     for i in range(numNStarts):
         if i not in sortedNStarts:
             sortedNStarts.append(i)
@@ -394,7 +401,7 @@ def load_args():
 
 if __name__ == '__main__':
     args = load_args()
-    input_file = './march_triage/march2019SemTri-2019-04-12T1713-Highlighter.csv'
+    input_file = './march2019SemTri-2019-04-12T1713-Highlighter.csv'
     if args.input_file:
         input_file = args.input_file
     dirname = os.path.dirname(input_file)
