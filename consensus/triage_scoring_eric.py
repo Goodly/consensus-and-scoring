@@ -293,8 +293,9 @@ def toFlagMatrix(starts, ends, nStarts, nEnds, codedUsers, flags):
             for j in np.arange(len(nStarts)):
                 #print(j)
                 o = nStarts[j]
-                if (starts[i] <= nStarts[j] and ends[i] >= nStarts[j]) or \
-                        (starts[i] <= nEnds[j] and ends[i] >= nEnds[j]):
+                if (starts[i] <= nStarts[j] <= ends[i]) or \
+                        (starts[i] <= nEnds[j] <= ends[i]) or \
+                        (starts[i] <= nStarts[j] and ends[i] >= nEnds[j]):
                     flagMatrix[j][codedUsers[i]] = flags[i]
         return flagMatrix.T
     return []
@@ -332,6 +333,20 @@ def assignFlags(matrix):
 
 
 def determineFlags(starts, ends, nStarts, nEnds, codedUsers, flags):
+    """
+    Assigns case flags to agreed upon unitizations
+    Important note: the inputs/outputs rely on order to keep the user's data aligned with the user code which is important
+        ie: the 0th start, end, codeduser and flag should all be from the same highlight
+        The same holds for the output
+        The 2nd flag in the output refers to the 2nd nStart and the 2nd nEnd
+    :param starts: array of starts
+    :param ends: array of ends from user input
+    :param nStarts: array of starts that are agreed upon (have passed the consensus check)
+    :param nEnds: array of ends that are agreed upon (have passed the consensus check)
+    :param codedUsers: array of users that have been assigned numbers 0-numusers
+    :param flags: array of caseNumbers
+    :return: an array of casenumbers
+    """
     print('flags')
     print(flags)
     print(codedUsers)
